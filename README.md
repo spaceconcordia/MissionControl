@@ -13,3 +13,7 @@ To run the server, execute the command `python app.py runserver` while in the
 virtual environment. This will launch the server in 'dev' mode. Pass a
 `-c,--config` option to change to 'test' or 'prod' mode. `python app.py` simply
 displays a help page.
+
+If you are developing with the [Space Concordia Vagrant environment](https://github.com/spaceconcordia/vagrant)
+then you should run `python app.py runserver -h 0.0.0.0` to access the localhost
+from the host machine.
