@@ -1,4 +1,4 @@
-### MissionControl
+# MissionControl
 Mission control software for Aleksandr, Space Concordia's CubeSat project, based
 on NASA's Open MCT. This README is intended for project developers.
 
