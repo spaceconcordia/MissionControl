@@ -1,0 +1,13 @@
+{
+  "name": "MissionControl",
+  "version": "1.0.0",
+  "description": "Mission control for Space Concordia's High Altitude Balloon",
+  "repository": "https://github.com/spaceconcordia/MissionControl",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "openmct": "https://github.com/nasa/openmct"
+  },
+  "scripts": {
+    "postinstall": "cd MissionControl/static/node_modules/openmct && yarn install"
+  }
+}
