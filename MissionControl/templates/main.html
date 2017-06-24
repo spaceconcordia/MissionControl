@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Aleksandr Mission Control</title>
     <script src="{{ url_for('static', filename=openmct_dir + 'openmct.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/dictionary-plugin.js') }}"></script>
 </head>
 <body>
 <script>
@@ -12,6 +13,8 @@
     openmct.install(openmct.plugins.MyItems());
     openmct.install(openmct.plugins.UTCTimeSystem());
     openmct.install(openmct.plugins.Espresso());
+
+    openmct.install(DictionaryPlugin());
 
     openmct.start();
 </script>
