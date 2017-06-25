@@ -5,7 +5,8 @@
   "repository": "https://github.com/spaceconcordia/MissionControl",
   "license": "Apache-2.0",
   "dependencies": {
-    "openmct": "https://github.com/nasa/openmct"
+    "openmct": "https://github.com/nasa/openmct",
+    "requirejs": "^2.3.3"
   },
   "scripts": {
     "postinstall": "cd MissionControl/static/node_modules/openmct && yarn install"

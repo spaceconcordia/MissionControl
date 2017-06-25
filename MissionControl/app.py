@@ -1,9 +1,6 @@
-"""Defines a factory function for producing Flask objects."""
-from flask import Flask, render_template
+"""Defines a factory function for creating Flask objects."""
+from flask import Flask, render_template, url_for
 from config import config
-
-# Path to Open MCT distribution directory relative to 'static'.
-OPENMCT_DIR = 'node_modules/openmct/dist/'
 
 
 def create_app(config_name):
@@ -17,8 +14,23 @@ def create_app(config_name):
         raise ValueError('Invalid configuration name: ' + str(e))
 
     @app.route('/')
+    def index():
+        """Renders index.html."""
+        return render_template('index.html')
+
+    @app.route('/scripts/main.js')
     def main():
-        """Renders main.html, the entry point to the Open MCT application."""
-        return render_template('main.html', openmct_dir=OPENMCT_DIR)
+        """Renders scripts/main.js, which initializes and runs the Open MCT
+        application.
+        """
+        requirejs_config = {
+            'baseUrl': url_for('static', filename='js'),
+            'paths': {
+                'openmct': '../node_modules/openmct/dist',
+                'plugins': 'plugins',
+            }
+        }
+        return render_template('scripts/main.js',
+                               requirejs_config=requirejs_config)
 
     return app
