@@ -1,6 +1,11 @@
-define(['openmct/openmct', 'plugins/example-plugin'],
-    function (openmct, ExamplePlugin) {
-        "use strict";
+/**
+ * Returns a function for launching Open MCT based on provided configuration
+ * options.
+ */
+
+define(['openmct', 'plugins/telemetry/telemetry'],
+    function (openmct, Telemetry) {
+        'use strict';
 
         /**
          * Configures and runs the Open MCT application.
@@ -8,11 +13,10 @@ define(['openmct/openmct', 'plugins/example-plugin'],
         return function (config) {
             openmct.setAssetPath(config.openmct_dir);
             openmct.install(openmct.plugins.LocalStorage());
-            openmct.install(openmct.plugins.MyItems());
             openmct.install(openmct.plugins.UTCTimeSystem());
             openmct.install(openmct.plugins.Espresso());
 
-            openmct.install(ExamplePlugin('Hello world.'));
+            openmct.install(Telemetry());
 
             openmct.start();
         }

@@ -1,6 +1,7 @@
 """Defines a factory function for creating Flask objects."""
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from config import config
+from .exceptions import ConfigError
 
 
 def create_app(config_name):
@@ -11,7 +12,7 @@ def create_app(config_name):
     try:
         app.config.from_object(config[config_name])
     except KeyError as e:
-        raise ValueError('Invalid configuration name: ' + str(e))
+        raise ConfigError('Invalid configuration name: ' + str(e))
 
     @app.route('/')
     def index():
@@ -23,14 +24,6 @@ def create_app(config_name):
         """Renders scripts/main.js, which initializes and runs the Open MCT
         application.
         """
-        requirejs_config = {
-            'baseUrl': url_for('static', filename='js'),
-            'paths': {
-                'openmct': '../node_modules/openmct/dist',
-                'plugins': 'plugins',
-            }
-        }
-        return render_template('scripts/main.js',
-                               requirejs_config=requirejs_config)
+        return render_template('scripts/main.js')
 
     return app
