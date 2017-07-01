@@ -25,8 +25,7 @@ def create_app(config_name):
         application.
         """
         websocket_url = '{scheme}://{host}'.format(
-            scheme='wss' if request.scheme == 'https' else 'ws',
-            host=request.host)
+            scheme='wss' if request.is_secure else 'ws', host=request.host)
         return render_template('scripts/main.js', websocket_url=websocket_url)
 
     return app
