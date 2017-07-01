@@ -7,7 +7,7 @@ on NASA's Open MCT. This README is intended for project developers.
    virtual environment.
 1. Install the required Python modules with `pip install -r requirements.txt`.
 1. Install the required JavaScript libraries with `yarn install
---modules-folder MissionControl/static/node_modules`.
+--modules-folder MissionControl/static/js/node_modules`.
 
 To run the server, execute the command `python app.py runserver` while in the
 virtual environment. This will launch the server in 'dev' mode. Pass a

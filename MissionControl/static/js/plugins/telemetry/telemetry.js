@@ -10,7 +10,7 @@ define(['./websocket-example'], function (WebSocketExample) {
     var rootKey = 'telemetry';
     var rootLocation = namespace + ':' + rootKey;
 
-    var domainObjectsIdentifiers = [{
+    var domainObjectIds = [{
         namespace: namespace,
         key: 'websocket-example'
     }];
@@ -52,7 +52,7 @@ define(['./websocket-example'], function (WebSocketExample) {
                 domainObject.identifier.key === rootKey;
         },
         load: function (domainObject) {
-            return Promise.resolve(domainObjectsIdentifiers);
+            return Promise.resolve(domainObjectIds);
         }
     };
 

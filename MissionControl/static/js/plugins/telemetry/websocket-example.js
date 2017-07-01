@@ -1,5 +1,10 @@
-define(function () {
+/**
+ * Simple plugin for receiving and displaying real-time data over WebSockets.
+ */
+define(function (socketUrl) {
     'use strict';
+
+    //var socket = new WebSocket(socketUrl);
 
     return {
         /**

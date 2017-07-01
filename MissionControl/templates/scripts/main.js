@@ -6,21 +6,24 @@
 /**
  * Configuration options for Open MCT.
  *
- * openmct_dir: path to Open MCT distribution files.
+ * openmctDir: path to Open MCT distribution files.
+ * websocketUrl: URL through which a WebSocket connection with the server will
+ *               be established.
  */
-var config = {
-    openmct_dir: '{{ url_for('static', filename='node_modules/openmct/dist') }}'
+var openmctConfig = {
+    openmctDir: '{{ url_for('static', filename='js/node_modules/openmct/dist') }}',
+    websocketUrl: '{{ websocket_url }}'
 };
 
 require.config({
     baseUrl: '{{ url_for('static', filename='js') }}',
     paths: {
-        'openmct': '../node_modules/openmct/dist/openmct',
+        'openmct': 'node_modules/openmct/dist/openmct',
         'plugins': 'plugins'
     }
 });
 
 require(['init-openmct'], function(InitOpenMCT) {
     'use strict';
-    InitOpenMCT(config);
+    InitOpenMCT(openmctConfig);
 });

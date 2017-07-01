@@ -1,5 +1,5 @@
 """Defines a factory function for creating Flask objects."""
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 from config import config
 from .exceptions import ConfigError
 
@@ -24,6 +24,7 @@ def create_app(config_name):
         """Renders scripts/main.js, which initializes and runs the Open MCT
         application.
         """
-        return render_template('scripts/main.js')
+        websocket_url = 'ws://{host}'.format(host=request.host)
+        return render_template('scripts/main.js', websocket_url=websocket_url)
 
     return app
