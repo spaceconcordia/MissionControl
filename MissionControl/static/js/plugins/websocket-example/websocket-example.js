@@ -1,23 +1,26 @@
 /**
- * Base plugin for Aleksandr telemetry. Returns a function to install the
+ * Base plugin for this WebSocket example. Returns a function to install the
  * plugin.
  */
 
-define(['./websocket-example'], function (WebSocketExample) {
+define([
+    './telemetry-plot-example',
+    './telemetry-provider-example'], function (TelemetryPlot, TelemetryProvider) {
+
     'use strict';
 
-    var namespace = 'aleksandr';
-    var rootKey = 'telemetry';
-    var rootLocation = namespace + ':' + rootKey;
+    var rootNamespace = '';
+    var rootKey = 'websocket-example';
+    var rootLocation = rootNamespace + ':' + rootKey;
 
+    // TODO prevent need to duplicate key (i.e. 'telemetry-plot' needs to be
+    // specified in objectProvider.
     var domainObjectIds = [{
-        namespace: namespace,
-        key: 'websocket-example'
+        namespace: rootNamespace, key: 'telemetry-plot'
     }];
 
     var rootIdentifier = {
-        namespace: namespace,
-        key: rootKey
+        namespace: rootNamespace, key: rootKey
     };
 
     var telemetryPlotType = {
@@ -32,13 +35,13 @@ define(['./websocket-example'], function (WebSocketExample) {
                 case rootKey:
                     return Promise.resolve({
                         identifier: identifier,
-                        name: 'Aleksandr Telemetry',
+                        name: 'WebSocket Example',
                         type: 'folder',
                         location: 'ROOT'
                     });
 
-                case 'websocket-example':
-                    return WebSocketExample.domainObject(identifier, rootLocation);
+                case 'telemetry-plot':
+                    return TelemetryPlot.domainObject(identifier, rootLocation);
 
                 default:
                     console.error('Cannot provide object with identifier ', identifier);
@@ -48,22 +51,23 @@ define(['./websocket-example'], function (WebSocketExample) {
 
     var compositionProvider = {
         appliesTo: function (domainObject) {
-            return domainObject.identifier.namespace === namespace &&
-                domainObject.identifier.key === rootKey;
+            return domainObject.identifier.namespace === rootNamespace && domainObject.identifier.key === rootKey;
         },
+
         load: function (domainObject) {
             return Promise.resolve(domainObjectIds);
         }
     };
 
-    return function () {
-        /**
-         * Adds a root object and object provider to Open MCT.
-         */
+    /**
+     * socket is a WebSocket object over which telemetry data will be received.
+     */
+    return function (socket) {
         return function install(openmct) {
             openmct.objects.addRoot(rootIdentifier);
-            openmct.objects.addProvider(namespace, objectProvider);
+            openmct.objects.addProvider(rootNamespace, objectProvider);
             openmct.composition.addProvider(compositionProvider);
+            openmct.telemetry.addProvider(TelemetryProvider(socket));
             openmct.types.addType('telemetry-plot', telemetryPlotType);
         };
     };

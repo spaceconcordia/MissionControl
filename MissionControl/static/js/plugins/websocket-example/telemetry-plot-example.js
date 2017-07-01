@@ -1,20 +1,19 @@
 /**
- * Simple plugin for receiving and displaying real-time data over WebSockets.
+ * Domain object for plotting telemetry data.
  */
-define(function (socketUrl) {
-    'use strict';
 
-    //var socket = new WebSocket(socketUrl);
+define(function () {
+    'use strict';
 
     return {
         /**
-         * Returns a domain object for the WebSocket example with the given
+         * Returns a domain object for the telemetry plot example with the given
          * identifier and location.
          */
         domainObject: function (identifier, location) {
             return Promise.resolve({
                 identifier: identifier,
-                name: 'WebSocket Example',
+                name: 'Telemetry Plot Example',
                 type: 'telemetry-plot',
                 location: location
             });
