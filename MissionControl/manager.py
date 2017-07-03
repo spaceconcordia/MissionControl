@@ -2,8 +2,11 @@
 command line options."""
 from flask_script import Command, Manager
 from gunicorn.app.base import Application
-from config import config
+import functools
+import sys
+from config import config_lookup
 from .appconfig import create_app
+from .exceptions import ConfigError
 
 __all__ = ['manager']
 
@@ -14,7 +17,7 @@ class GunicornServer(Application):
         self.app = app
 
     def init(self, parser, opts, args):
-        pass   # TODO
+        pass  # TODO
 
     def load(self):
         return self.app
@@ -33,8 +36,23 @@ class GunicornCommand(Command):
         gs.run()
 
 
+def log_configerror(func):
+    """Decorator to log a ConfigError exception and exit with error."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except ConfigError as e:
+            print('ERROR: invalid config name {}'.format(e), file=sys.stderr)
+            sys.exit(1)
+
+    return wrapper
+
+
 manager = Manager(create_app)
-manager.add_option('-c', '--config', dest='config_name',
-                   choices=sorted(config.keys()),
-                   help="sets configuration type. defaults to 'dev'.")
 manager.add_command('runserver', GunicornCommand())
+manager.add_option('-c', '--config', dest='config_name',
+                   choices=sorted(config_lookup.keys()), default='dev',
+                   help="sets configuration type. defaults to 'dev'.")
+
+manager.run = log_configerror(manager.run)

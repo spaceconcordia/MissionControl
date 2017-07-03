@@ -4,18 +4,19 @@ from flask import Flask, request, render_template
 from flask_sockets import Sockets
 import json
 import time
-from config import config
+from config import config_lookup
 from .exceptions import ConfigError
 
 
-def create_app(config_name='dev'):
+def create_app(config_name):
     """Factory function for creating and configuring a Flask object based on the
-    provided configuration name."""
+    provided configuration name. Raise a ConfigError exception if invalid
+    configuration name specified."""
     app = Flask('MissionControl')
     try:
-        app.config.from_object(config[config_name])
+        app.config.from_object(config_lookup[config_name])
     except KeyError as e:
-        raise ConfigError('Invalid configuration name: ' + str(e))
+        raise ConfigError(e)
 
     sockets = Sockets(app)
 
