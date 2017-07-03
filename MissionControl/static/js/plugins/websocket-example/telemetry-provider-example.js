@@ -6,7 +6,7 @@ define(function () {
     'use strict';
 
     /**
-     * socket is the WebSocket object over which telemetry data will be
+     * "socket" is the WebSocket object over which telemetry data will be
      * received.
      */
     return function (socket) {
@@ -16,7 +16,11 @@ define(function () {
             },
 
             subscribe: function (domainObject, callback, options) {
-                socket.onmessage = callback;
+                socket.onmessage = function (messageEvent) {
+                    console.log('Message received from WebSocket.');
+                    console.log(messageEvent.data);
+                    callback(messageEvent);
+                };
                 return function () { } // TODO do I need an unsubscribe function?
             }
         };

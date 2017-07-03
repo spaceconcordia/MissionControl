@@ -60,7 +60,8 @@ define([
     };
 
     /**
-     * socket is a WebSocket object over which telemetry data will be received.
+     * "socket" is a WebSocket object over which telemetry data will be
+     * received.
      */
     return function (socket) {
         return function install(openmct) {

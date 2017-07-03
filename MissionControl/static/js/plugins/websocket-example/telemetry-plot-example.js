@@ -8,17 +8,26 @@ define(function () {
     /**
      * Describes the format of telemetry data that will be received.
      */
-    var telemetryMetadata = {
-        key: 'altitude',
-        name: 'Altitude',
-        units: 'metres',
-        format: 'float',
-        min: 0,
-        max: 50,
-        hints: {
-            range: true
-        }
-    };
+    var telemetryMetadata = [
+        {
+            key: 'altitude',
+            name: 'Altitude',
+            units: 'metres',
+            format: 'float',
+            min: 0,
+            max: 50,
+            hints: {
+                range: true
+            }
+        },
+        {
+            key: 'timestamp',
+            name: 'Timestamp',
+            format: 'utc',
+            hints: {
+                domain: true
+            }
+        }];
 
     return {
         /**
