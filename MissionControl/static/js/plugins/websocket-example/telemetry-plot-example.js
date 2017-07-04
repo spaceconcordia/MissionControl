@@ -39,7 +39,7 @@ define(function () {
                 identifier: identifier,
                 name: 'Telemetry Plot Example',
                 type: 'telemetry-plot',
-                telemetry: telemetryMetadata,
+                //telemetry: telemetryMetadata,
                 location: location
             });
         }

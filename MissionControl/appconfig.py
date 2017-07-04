@@ -1,9 +1,6 @@
 """Defines a factory function for creating Flask objects based on configuration
 details."""
 from flask import Flask, request, render_template
-from flask_sockets import Sockets
-import json
-import time
 from config import config_lookup
 from .exceptions import ConfigError
 
@@ -18,8 +15,6 @@ def create_app(config_name):
     except KeyError as e:
         raise ConfigError(e)
 
-    sockets = Sockets(app)
-
     @app.route('/')
     def index():
         """Renders index.html."""
@@ -32,15 +27,5 @@ def create_app(config_name):
         websocket_url = '{scheme}://{host}/telemetry'.format(
             scheme='wss' if request.is_secure else 'ws', host=request.host)
         return render_template('scripts/main.js', websocket_url=websocket_url)
-
-    @sockets.route('/telemetry')
-    def send_example_telemetry(ws):
-        telemetry = {
-            'altitude': 25.0,
-            'time': time.time(),
-        }
-        while not ws.closed:
-            ws.send(json.dumps(telemetry))
-            time.sleep(seconds=1)
 
     return app

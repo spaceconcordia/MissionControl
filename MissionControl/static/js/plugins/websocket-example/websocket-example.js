@@ -9,7 +9,7 @@ define([
 
     'use strict';
 
-    var rootNamespace = '';
+    var rootNamespace = 'aleksandr';
     var rootKey = 'websocket-example';
     var rootLocation = rootNamespace + ':' + rootKey;
 
@@ -67,9 +67,9 @@ define([
         return function install(openmct) {
             openmct.objects.addRoot(rootIdentifier);
             openmct.objects.addProvider(rootNamespace, objectProvider);
-            openmct.composition.addProvider(compositionProvider);
-            openmct.telemetry.addProvider(TelemetryProvider(socket));
             openmct.types.addType('telemetry-plot', telemetryPlotType);
+            openmct.composition.addProvider(compositionProvider);
+//            openmct.telemetry.addProvider(TelemetryProvider(socket));
         };
     };
 });
