@@ -14,7 +14,7 @@ define([
     var rootLocation = rootNamespace + ':' + rootKey;
 
     // TODO prevent need to duplicate key (i.e. 'telemetry-plot' needs to be
-    // specified in objectProvider.
+    // specified in objectProvider).
     var domainObjectIds = [{
         namespace: rootNamespace, key: 'telemetry-plot'
     }];
@@ -41,7 +41,7 @@ define([
                     });
 
                 case 'telemetry-plot':
-                    return TelemetryPlot.domainObject(identifier, rootLocation);
+                    return TelemetryPlot(identifier, rootLocation);
 
                 default:
                     console.error('Cannot provide object with identifier ', identifier);
@@ -67,9 +67,9 @@ define([
         return function install(openmct) {
             openmct.objects.addRoot(rootIdentifier);
             openmct.objects.addProvider(rootNamespace, objectProvider);
-            openmct.types.addType('telemetry-plot', telemetryPlotType);
             openmct.composition.addProvider(compositionProvider);
-//            openmct.telemetry.addProvider(TelemetryProvider(socket));
+            openmct.types.addType('telemetry-plot', telemetryPlotType);
+            openmct.telemetry.addProvider(TelemetryProvider(socket));
         };
     };
 });

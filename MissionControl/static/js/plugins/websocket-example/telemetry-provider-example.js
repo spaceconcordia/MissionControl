@@ -17,11 +17,17 @@ define(function () {
 
             subscribe: function (domainObject, callback, options) {
                 socket.onmessage = function (messageEvent) {
-                    console.log('Message received from WebSocket.');
-                    console.log(messageEvent.data);
-                    callback(messageEvent);
+                    callback(JSON.parse(messageEvent.data));
                 };
-                return function () { } // TODO do I need an unsubscribe function?
+                return function () { } // TODO implement unsubscribe.
+            },
+
+            supportsRequest: function (domainObject, options) {
+                return domainObject.type === 'telemetry-plot';
+            },
+
+            request: function (domainObject, options) {
+                return Promise.resolve([]); // TODO request data.
             }
         };
     };
