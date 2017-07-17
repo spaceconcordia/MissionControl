@@ -4,6 +4,6 @@
     "requirejs": "^2.3.3"
   },
   "scripts": {
-    "postinstall": "cd MissionControl/static/js/node_modules/openmct && yarn install"
+    "postinstall": "cd webapp/node_modules/openmct && npm install --production=false"
   }
 }

@@ -407,7 +407,7 @@ on-finished@~2.3.0:
 
 "openmct@https://github.com/nasa/openmct":
   version "0.12.1-SNAPSHOT"
-  resolved "https://github.com/nasa/openmct#34ef98e0cdb94c129ea1078e8dc3ed00ab3e4e01"
+  resolved "https://github.com/nasa/openmct#23839b05b0130792a6541942aac5bf7c21c11542"
   dependencies:
     d3-array "^1.0.2"
     d3-axis "^1.0.4"

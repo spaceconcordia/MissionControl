@@ -1,4 +1,4 @@
-"""Contains configuration classes for MissionControl."""
+"""Defines configuration classes."""
 
 
 class Config:
@@ -11,11 +11,6 @@ class DevConfig(Config):
     DEBUG = True
 
 
-class TestConfig(Config):
-    """Configurations for testing."""
-    TESTING = True
-
-
 class ProdConfig(Config):
     """Configurations for production."""
     pass
@@ -23,7 +18,6 @@ class ProdConfig(Config):
 
 # Maps configuration names to their corresponding config class.
 config_lookup = {
-    'dev': DevConfig,
-    'test': TestConfig,
-    'prod': ProdConfig,
+    'development': DevConfig,
+    'production': ProdConfig,
 }
