@@ -5,8 +5,11 @@ gevent==1.2.2
 gevent-websocket==0.10.1
 greenlet==0.4.12
 gunicorn==19.7.1
+honcho==1.0.1
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 setproctitle==1.1.10
+ujson==1.35
 Werkzeug==0.12.2
+wsaccel==0.6.2

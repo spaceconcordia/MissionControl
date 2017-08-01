@@ -1,19 +1,29 @@
-"""Defines configuration classes."""
+"""
+Defines configuration classes for Flask server.
+"""
+import os
 
 
 class Config:
-    """Base configuration class."""
-    pass
+    """
+    Base configuration class.
+    """
+    BROADCAST_PATH = os.environ.get('BROADCAST_PATH')
 
 
 class DevConfig(Config):
-    """Configurations for development."""
+    """
+    Configurations for development.
+    """
+    LOGGING = 'DEBUG'
     DEBUG = True
 
 
 class ProdConfig(Config):
-    """Configurations for production."""
-    pass
+    """
+    Configurations for production.
+    """
+    LOGGING = 'INFO'
 
 
 # Maps configuration names to their corresponding config class.

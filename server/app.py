@@ -1,8 +1,10 @@
-"""Initializes the Flask app based on environment variables."""
+"""
+Initializes the Flask app based on environment variables.
+"""
 import os
 import sys
-from .appconfig import create_app
-from .exceptions import ConfigError
+from server.appconfig import create_app
+from server.exceptions import ConfigError
 
 try:
     config_name = os.environ.get('APP_CONFIG', default='development')

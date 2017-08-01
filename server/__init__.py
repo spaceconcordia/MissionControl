@@ -1,2 +1,4 @@
-"""Initializes and exposes the Flask app."""
-from .app import app
+"""
+Initializes and exposes the Flask app.
+"""
+from server.app import app
